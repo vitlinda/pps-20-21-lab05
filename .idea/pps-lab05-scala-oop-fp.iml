@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager">
-    <output url="file://$MODULE_DIR$/bin/production/courses1920-pps-lab05-scala-oop-fp" />
-    <output-test url="file://$MODULE_DIR$/bin/test/courses1920-pps-lab05-scala-oop-fp" />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/courses1920-pps-lab05-scala-oop-fp.iml" filepath="$PROJECT_DIR$/.idea/courses1920-pps-lab05-scala-oop-fp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pps-lab05-scala-oop-fp.iml" filepath="$PROJECT_DIR$/.idea/pps-lab05-scala-oop-fp.iml" />
     </modules>
   </component>
 </project>
