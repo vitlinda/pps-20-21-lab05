@@ -134,9 +134,23 @@ trait ListImplementation[A] extends List[A] {
    // oppure usare stream, con una map che itera contemporaneamente su due liste
   }
 
-  override def partition(pred: A => Boolean): (List[A],List[A]) = ???
+  override def partition(pred: A => Boolean): (List[A],List[A]) = {
+    var l1: List[A] = Nil()
+    var l2: List[A] = Nil()
+    foreach( h => if (pred(h)) l1 = h :: l1 else l2 = h :: l2)
+    (l1.reverse(), l2.reverse())
+  }
 
-  override def span(pred: A => Boolean): (List[A],List[A]) = ???
+  override def span(pred: A => Boolean): (List[A],List[A]) = {
+    var l1: List[A] = Nil()
+    var list: List[A] = this
+
+    while(pred(list.head.get)){
+      l1 = list.head.get :: l1
+      list = list.tail.get
+    }
+    (l1.reverse(), list)
+  }
 
   /**
     *
@@ -179,26 +193,28 @@ object ListsTest extends App {
 
   assert(List(1,2,3) == List(1,2,3))
 
+  println("Scala partition")
   println(scala.collection.immutable.List(10,20,30,40).partition(_>15))
+  println("Scala span")
   println(scala.collection.immutable.List(10,20,30,40).span(_>15))
 
-  // Ex. 1: zipRight
+  println("Ex. 1: zipRight")
   println(l.zipRight.toSeq) // List((10,0), (20,1), (30,2), (40,3))
 
-  // Ex. 2: partition
+  println("Ex. 2: partition")
   println(l.partition(_>15)) // ( Cons(20,Cons(30,Cons(40,Nil()))), Cons(10,Nil()) )
 
-  // Ex. 3: span
+  println("Ex. 3: span")
   println(l.span(_>15)) // ( Nil(), Cons(10,Cons(20,Cons(30,Cons(40,Nil())))) )
   println(l.span(_<15)) // ( Cons(10,Nil()), Cons(20,Cons(30,Cons(40,Nil()))) )
 
-  // Ex. 4: reduce
+  println("Ex. 4: reduce")
   println(l.reduce(_+_)) // 100
   try { List[Int]().reduce(_+_); assert(false) } catch { case _:UnsupportedOperationException => }
 
-  // Ex. 5: takeRight
+  println("Ex. 5: takeRight")
   println(l.takeRight(2)) // Cons(30,Cons(40,Nil()))
 
-  // Ex. 6: collect
+  println("Ex. 6: collect")
   // println(l.collect { case x if x<15 || x>35 => x-1 }) // Cons(9, Cons(39, Nil()))
 }
