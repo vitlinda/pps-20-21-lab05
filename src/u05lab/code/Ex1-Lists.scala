@@ -177,12 +177,16 @@ trait ListImplementation[A] extends List[A] {
     case Nil() => throw new UnsupportedOperationException
   }
 
-  override def take[A](n: Int): List[A] =  ???/* (this, n) match {
-    case (Cons(h, tail), n) if n  > 0 => Cons(h, take(n - 1))
-    case _ => Nil()
-  } */
 
-  override def takeRight(n: Int): List[A] = this.reverse().take(n)
+  override def take[A](n: Int): List[A] =  {
+    def _take(l: List[A])(n: Int): List[A] = (l, n) match {
+      case (Cons(h, tail), n) if n  > 0 => Cons(h, _take(tail)(n - 1))
+      case _ => Nil()
+    }
+    _take(this.asInstanceOf[List[A]])(n)
+  }
+
+  override def takeRight(n: Int): List[A] = this.reverse().take(n).reverse()
 }
 
 // Factories

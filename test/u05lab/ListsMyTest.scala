@@ -38,4 +38,11 @@ class ListsMyTest {
     val l1 = 10 :: nil
     assertEquals(10, l1.reduce(_+_))
   }
+
+  @Test
+  def takeRight() = {
+    import List._
+    val l = 10 :: 20 :: 30 :: 40 :: nil
+    assertEquals(cons(30, cons(40, nil)),l.takeRight(2))
+  }
 }
