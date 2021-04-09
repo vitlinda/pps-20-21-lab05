@@ -41,6 +41,8 @@ sealed trait List[A] {
 
   def take[A](n: Int): List[A]
 
+  def collect[A, B](pf: PartialFunction[A, B]): List[B]
+
   // right-associative construction: 10 :: 20 :: 30 :: Nil()
   def ::(head: A): List[A] = Cons(head, this)
 }
@@ -145,7 +147,6 @@ trait ListImplementation[A] extends List[A] {
     * var k = -1
     * this.map(e => {k+=1;(e, k) })
     * */
-    //provare soluzioni alternative
     // oppure usare stream, con una map che itera contemporaneamente su due liste
   }
 
@@ -187,6 +188,13 @@ trait ListImplementation[A] extends List[A] {
   }
 
   override def takeRight(n: Int): List[A] = this.reverse().take(n).reverse()
+
+  override def collect[A, B](pf: PartialFunction[A, B]): List[B] = {
+    var l: List[B] = Nil()
+    this.foreach(e => l = Cons[B](pf(e.asInstanceOf[A]), l))
+    l.reverse()
+  }
+
 }
 
 // Factories

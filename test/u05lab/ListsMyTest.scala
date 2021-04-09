@@ -40,9 +40,25 @@ class ListsMyTest {
   }
 
   @Test
-  def takeRight() = {
+  def testTakeRight() = {
     import List._
     val l = 10 :: 20 :: 30 :: 40 :: nil
     assertEquals(cons(30, cons(40, nil)),l.takeRight(2))
+  }
+
+  @Test
+  def testCollect() = {
+    import List._
+    val l = 30 :: 40 :: nil
+
+//    val partialFunction: PartialFunction[Int, Int] = new PartialFunction[Int, Int] {
+//      def apply(x: Int): Int = x + 1
+//      def isDefinedAt(x: Int) = x > 20
+//    }
+    val partialFunction: PartialFunction[Int, Int] = {
+      case e: Int if e > 20 => e + 1
+    }
+      assertEquals(cons(31, cons(41, nil)), l.collect(partialFunction))
+
   }
 }
