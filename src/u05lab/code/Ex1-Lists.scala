@@ -39,6 +39,8 @@ sealed trait List[A] {
 
   def takeRight(n: Int): List[A]
 
+  def take[A](n: Int): List[A]
+
   // right-associative construction: 10 :: 20 :: 30 :: Nil()
   def ::(head: A): List[A] = Cons(head, this)
 }
@@ -170,12 +172,17 @@ trait ListImplementation[A] extends List[A] {
     * @throws UnsupportedOperationException if the list is empty
     */
   override def reduce(op: (A, A) => A): A = this match {
-    case Cons(h, t) => op(h, t.reduce(op))
     case Cons(h, Nil()) => h
+    case Cons(h, tail) => op(h, tail.reduce(op))
     case Nil() => throw new UnsupportedOperationException
   }
 
-  override def takeRight(n: Int): List[A] = ???
+  override def take[A](n: Int): List[A] =  ???/* (this, n) match {
+    case (Cons(h, tail), n) if n  > 0 => Cons(h, take(n - 1))
+    case _ => Nil()
+  } */
+
+  override def takeRight(n: Int): List[A] = this.reverse().take(n)
 }
 
 // Factories

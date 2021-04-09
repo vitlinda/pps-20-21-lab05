@@ -33,10 +33,9 @@ class ListsMyTest {
     import List._
     val l = 10 :: 20 :: 30 :: 40 :: nil
     assertThrows(classOf[UnsupportedOperationException], () => List.nil[Int].reduce(_+_))
-//    assertEquals(100, l.reduce(_+_))
-//
-//    val l1 = 10 :: nil
-//    assertEquals(10, l.reduce(_+_))
+    assertEquals(100, l.reduce(_+_))
 
+    val l1 = 10 :: nil
+    assertEquals(10, l1.reduce(_+_))
   }
 }
