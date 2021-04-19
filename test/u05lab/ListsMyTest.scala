@@ -58,7 +58,9 @@ class ListsMyTest {
     val partialFunction: PartialFunction[Int, Int] = {
       case e: Int if e > 20 => e + 1
     }
+
       assertEquals(cons(31, cons(41, nil)), l.collect(partialFunction))
+      //oppure: l.collect{case e: Int if e > 20 => e + 1}
 
   }
 }
